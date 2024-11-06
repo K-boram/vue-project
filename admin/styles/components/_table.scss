@@ -1,0 +1,202 @@
+.table {
+    &-top {
+        @apply flex justify-between;
+        min-height: 51px;
+
+        &__util {
+            @apply flex items-center;
+            @include space($x: 14px);
+        }
+    }
+
+    &-count {
+        display: inline-block;
+        height: 32px;
+        line-height: 32px;
+        margin: 0 5px 5px 0;
+        padding: 0 12px;
+        border-radius: 16px;
+        background-color: var(--color-black);
+        font-size: var(--font-size-13);
+        font-weight: 500;
+        color: var(--color-white);
+    }
+
+    &-bottom {
+        @apply flex justify-between;
+        margin-top: 90px !important;
+    }
+
+    &__checkbox {
+        >div {
+            width: var(--table-checkbox-cell-width);
+        }
+
+        .checkbox {
+            input[type="checkbox"]+label {
+                display: block;
+                position: absolute;
+                top: 50%;
+                margin-top: -11px;
+                left: 12px;
+                width: 18px;
+                height: 18px;
+                padding: 0;
+            }
+        }
+    }
+
+    &__sort {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        margin-left: 8px;
+        vertical-align: middle;
+
+        svg {
+            width: 8px;
+            fill: var(--table-text-color);
+        }
+    }
+
+    &__image {
+        >div {
+            width: var(--table-image-cell-width);
+            padding: 0 !important;
+            margin: 0 6px;
+        }
+    }
+
+    &__status {
+        @apply flex items-center;
+        @include space($x: 4px);
+
+        svg {
+            fill: var(--table-text-color);
+        }
+    }
+}
+
+.custom-table {
+    overflow-x: hidden;
+
+    &__inner {
+        display: table;
+        width: 100%;
+    }
+
+    table {
+        display: table;
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 0;
+        color: var(--table-text-color);
+
+        thead {
+            border-bottom: 1px solid var(--table-border-color);
+        }
+
+        tbody {
+            tr {
+                border-bottom: 1px solid var(--table-border-color);
+
+                &:hover {
+                    background-color: var(--table-row-hover-color);
+                }
+            }
+        }
+
+        th {
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        tr {
+            transition: background-color .25s ease;
+
+            &:last-child {
+                border-bottom: none !important;
+            }
+
+            &.is-muted {
+                --table-text-color: var(--table-muted-color);
+                --table-text-hover-color: var(--table-muted-color);
+            }
+        }
+
+        td {
+            >* {
+                font-weight: 300;
+            }
+        }
+
+        th,
+        td {
+            display: table-cell;
+            padding: 0;
+            border-radius: 0;
+            border: 0;
+            text-align: left;
+            cursor: pointer;
+
+
+            &.packed {
+                width: 1%;
+                white-space: nowrap;
+            }
+        }
+
+        th>span,
+        th>a,
+        td>span,
+        td>a,
+        th>div,
+        td>div {
+            position: relative;
+            display: block;
+            line-height: 20px;
+            padding: 15px 12px;
+            color: var(--table-text-color);
+            font-size: var(--table-font-size);
+            transition: .3s background-color, .3s color;
+
+            &:hover:not(:disabled) {
+                color: var(--table-text-hover-color);
+
+                svg {
+                    fill: var(--table-text-hover-color);
+                }
+            }
+        }
+    }
+}
+
+.el-pagination {
+    .el-pager {
+        li {
+            min-width: var(--pagination-size);
+            width: var(--pagination-size);
+            height: var(--pagination-size);
+            line-height: var(--pagination-size);
+            padding: 0 10px;
+            border-radius: 0;
+            background: transparent;
+            box-sizing: border-box;
+            font-size: var(--font-size-18);
+            font-weight: 400 !important;
+            color: var(--color-gray-15);
+            transition: .3s all;
+
+            &:hover:not(.is-active) {
+                opacity: .5;
+                color: var(--color-gray-15);
+            }
+
+            &.is-active {
+                background-color: var(--color-primary);
+                color: var(--color-white);
+            }
+        }
+    }
+}

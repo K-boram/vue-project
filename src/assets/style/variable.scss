@@ -1,0 +1,65 @@
+/* ------------------------- Color 변수 ------------------------- */
+// Primary
+$primary-1: #ff5089;
+$primary-2: #fed7e3;
+$primary-3: #fffafc;
+
+// Black
+$black-1: #111111; // Font
+$black-2: #333333; // Font Default
+$black-3: #555555; // Font
+$black-4: #666666;
+$black-5: #aaaaaa; // Disabled
+$black-6: #bfc0c4; // Input
+$black-7: #cccccc;
+$black-8: #dddddd;
+$black-9: #eeeeee;
+$white: #ffffff;
+
+// Blue Gray
+$blue-1: #61739b;
+$blue-2: #697da9; // Label
+$blue-3: #b2b8d0;
+$blue-4: #e4e6ef;
+$blue-5: #f0f4fc; // Grid
+$blue-6: #f3f4f8; // Background
+$blue-7: #f8f8fb; // Table
+
+// Purple
+$purple-1: #8928ff;
+$purple-2: #9e4eff;
+$purple-3: #c18dff;
+$purple-4: #d3afff;
+$purple-5: #e3ccff;
+$purple-6: #efe2ff;
+$purple-7: #f7f1ff;
+
+// Gray
+$gray-50: #dce0e5;
+
+// Other
+$success: #009d79;
+$error: #de350b;
+$dim: #00000080;
+//  #4885FE
+
+/* ------------------------- Style ------------------------- */
+/*  Grid  */
+$gridHeight: 48px;
+$gridBgColor: $blue-7;
+
+/*  Border Radius  */
+$borderRadius: 4px;
+
+/*  Box Shadow  */
+$boxShadow: 0 1px 5px 1px rgb(0 0 0 / 10%);
+
+/*  Transition  */
+$transition: all 0s ease-in-out;
+
+/* Height*/
+$height: 38px;
+$height-sm: 28px;
+/* ------------------------- Font Family ------------------------- */
+$font-title: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+$font-body: 'Malgun Gothic', 'Noto Sans KR', sans-serif;

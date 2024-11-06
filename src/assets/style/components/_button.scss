@@ -1,0 +1,112 @@
+$btn-size: (
+  sm: (
+    padding: 4px 14px,
+    font-size: var(--font-size-12),
+    icon-size: 13px,
+  ),
+  md: (
+    padding: 6px 16px,
+    font-size: var(--font-size-14),
+    icon-size: 13px,
+  ),
+  lg: (
+    padding: 9px 20px,
+    font-size: var(--font-size-18),
+    icon-size: 18px,
+  ),
+);
+
+@mixin btn-base($size: 'md', $type: 'full', $color: var(--color-primary)) {
+  display: inline-block;
+  width: fit-content;
+  line-height: 20px;
+  padding: map-get(map-get($btn-size, $size), padding);
+  border-radius: 4px;
+  border: 1px solid $color;
+  background-color: if($type== 'full', $color, var(--color-white));
+  box-sizing: border-box;
+  font-size: map-get(map-get($btn-size, $size), font-size);
+  color: if($type== 'full', var(--color-white), $color);
+  text-align: center;
+  transition:
+    0.3s background-color,
+    0.3s color,
+    0.3s border-color;
+  cursor: pointer;
+
+  svg {
+    width: map-get(map-get($btn-size, $size), icon-size);
+    height: map-get(map-get($btn-size, $size), icon-size);
+    fill: if($type== 'full', var(--color-white), $color);
+    transition: 0.3s fill;
+  }
+
+  // &:hover:not(:disabled) {
+  //   background-color: if($type== 'full', var(--color-white), $color);
+  //   color: if($type== 'full', $color, var(--color-white));
+
+  //   svg {
+  //     path {
+  //       fill: if($type== 'full', $color, var(--color-white));
+  //     }
+  //   }
+  // }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.has-icon {
+    @apply inline-flex items-center;
+    // @include space($x: 5px);
+  }
+}
+
+.admin-btn {
+  &__primary {
+    @include btn-base;
+    background: var(--color-primary-800);
+    color: var(--color-white);
+
+    &--lg {
+      @include btn-base($size: lg);
+    }
+  }
+
+  &__danger {
+    @include btn-base($color: #d00);
+  }
+
+  &__line {
+    @include btn-base($type: line, $color: var(--color-gray-4));
+  }
+
+  &__text {
+    padding: 12px 0;
+    border-bottom: 1px solid transparent;
+    font-size: var(--font-size-14);
+    color: gray;
+
+    svg {
+      fill: gray;
+    }
+
+    &:hover:not(:disabled) {
+      color: #333;
+      border-bottom-color: var(--color-primary);
+    }
+  }
+}
+
+.primary {
+  @include btn-base($color: var(--color-primary-800));
+  // @include btn-base($color: --color-primary-800);
+
+  &--lg {
+    @include btn-base($size: lg, $color: var(--color-primary-800));
+  }
+  &--sm {
+    @include btn-base($size: sm, $color: var(--color-primary-800));
+  }
+}

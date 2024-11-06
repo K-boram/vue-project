@@ -1,0 +1,600 @@
+// @import '@/assets/scss/grid';
+@import './variable.scss';
+@import './mixin.scss';
+@import './components.scss';
+@import './components/_button.scss';
+
+/* ==================== Font Face ==================== */
+@font-face {
+  font-family: 'Malgun Gothic';
+  src:
+    url('/font/malgun.otf') format('opentype'),
+    url('/font/malgun.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  src:
+    url('/font/NotoSansCJKkr-Regular.otf') format('opentype'),
+    url('/font/NotoSansCJKkr-Regular.woff') format('woff'),
+    url('/font/NotoSansCJKkr-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  src:
+    url('/font/NotoSansCJKkr-Medium.otf') format('opentype'),
+    url('/font/NotoSansCJKkr-Medium.woff') format('woff'),
+    url('/font/NotoSansCJKkr-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  src:
+    url('/font/NotoSansCJKkr-Bold.otf') format('opentype'),
+    url('/font/NotoSansCJKkr-Bold.woff') format('woff'),
+    url('/font/NotoSansCJKkr-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==================== Scroll Bar ==================== */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: $white $black-8;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: $white;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $black-8;
+  border-radius: 10px;
+}
+
+/* ==================== Layout ==================== */
+#app {
+  overflow: hidden;
+  height: 100vh;
+  line-height: inherit;
+  @include body(font-md);
+
+  .FrameworkWrap {
+    @apply flex h-screen;
+    overflow-x: auto;
+
+    .content {
+      width: 100%;
+      height: 100%;
+      overflow-y: scroll;
+      padding: 35px 10px 100px 0;
+      background-color: $blue-6;
+
+      &__wrap {
+        width: 1440px;
+        padding: 0 20px;
+        margin: 0 auto;
+      }
+
+      &.main {
+        padding: 0;
+
+        .content__wrap {
+          width: 100%;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+body {
+  margin: 0;
+}
+
+/* ==================== 텍스트 숨김 (웹접근성) ==================== */
+.hide {
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  z-index: -1;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+}
+
+/* ==================== Font Style ==================== */
+
+/* ==================== Style Reset ==================== */
+button,
+input,
+textarea,
+a {
+  &:focus {
+    outline: transparent !important;
+  }
+}
+
+img {
+  width: 100%;
+}
+
+/* ==================== Link Style ==================== */
+a {
+  display: inline-block;
+}
+
+// 링크
+
+/* ==================== Button ==================== */
+button + button {
+  margin-left: 10px;
+}
+/* ==================== Form ==================== */
+
+/* ==== Tree Select ==== */
+
+// Option
+
+/* ==================== Toast ==================== */
+
+// ----------------- Tab ------------------
+.tab {
+  &__header {
+    @apply flex items-center;
+    width: 100%;
+    max-height: 35px;
+  }
+
+  &__menu {
+    @apply flex items-center;
+    padding: 0 20px;
+
+    &:hover {
+      .tab__name {
+        border-bottom: 1px solid $black-3;
+      }
+    }
+
+    &--disabled {
+      color: $black-5;
+      cursor: not-allowed;
+    }
+
+    &:not(:last-child) {
+      border-right: 1px solid #bbc4d3;
+    }
+
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+
+  &__name {
+    @include title(title-md);
+    line-height: 23px;
+    border: 1px solid transparent;
+    font-weight: 400;
+    color: $black-3;
+    cursor: pointer;
+
+    &--active {
+      font-weight: 700;
+      color: $black-1;
+    }
+  }
+
+  &__content {
+    padding: 25px;
+  }
+
+  // color small ver
+  &--primary {
+    .tab__header {
+      max-height: 60px;
+      padding-left: 20px;
+      border-bottom: 1px solid $black-8;
+    }
+
+    .tab__menu {
+      @apply flex items-center;
+      padding: 0 12px;
+
+      &:hover {
+        .tab__name {
+          border-color: transparent;
+          color: $primary-1;
+          font-weight: 700;
+
+          &--active {
+            border-bottom: 2px solid $primary-1;
+          }
+        }
+      }
+
+      &:not(:last-child) {
+        border-color: transparent;
+      }
+    }
+
+    .tab__name {
+      @include body(font-lg);
+      line-height: 18px;
+      padding: 20px 0;
+
+      &--active {
+        border-bottom: 2px solid $primary-1;
+        color: $primary-1;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+// ----------------- Search -----------------
+.search-form {
+  @apply flex items-end justify-between;
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: 4px;
+  background-color: $blue-4;
+
+  // 검색 영역 내 폼 Style Reset
+
+  input {
+    height: 40px;
+    line-height: 40px;
+    border-radius: 4px;
+
+    &:focus {
+      border: 1px solid $purple-1;
+    }
+  }
+
+  .mx-datepicker {
+    width: 140px !important;
+  }
+
+  .form__label {
+    height: 36px;
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+
+  &__form {
+    @apply flex flex-wrap items-center;
+    width: 78%;
+  }
+}
+
+// ----------------- UI Elements -----------------
+.input {
+  .form {
+    &__list {
+      padding: 0;
+    }
+  }
+}
+
+.tag {
+  @apply flex items-center justify-center;
+  width: fit-content;
+  min-width: 60px;
+  height: 30px;
+  padding: 0 7px;
+  border: 1px solid $black-8;
+  border-radius: 3px;
+  background-color: transparent;
+  font-weight: 600;
+  cursor: default;
+
+  &__list {
+    @apply flex items-center;
+
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+
+  &--lg {
+    min-width: 80px;
+    height: 32px;
+  }
+
+  &--sm {
+    min-width: 44px;
+    height: 26px;
+    padding: 2px 4px 5px 4px;
+  }
+
+  &--xs {
+    min-width: 36px;
+    height: 20px;
+    padding: 2px 5px 4px 4px;
+    font-weight: 400;
+    font-size: 12px;
+
+    .icon--cancel {
+      margin-top: 1px;
+      margin-left: 6px;
+    }
+  }
+
+  &--disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+
+    .icon--cancel {
+      cursor: not-allowed;
+    }
+  }
+
+  &__name {
+  }
+
+  &__full {
+    border-color: transparent;
+
+    &--pink {
+      background-color: rgba(249, 37, 101, 0.1);
+      color: #ff6094;
+    }
+
+    &--purple {
+      background-color: rgba(120, 114, 240, 0.1);
+      color: $purple-2;
+    }
+
+    &--black {
+      background-color: #f5f7fa;
+      color: #798ea0;
+    }
+
+    &--red {
+      background-color: $error;
+      color: $white;
+    }
+
+    &--blue {
+      border: 1px solid #cdd9f7;
+      background-color: #ebf0ff;
+    }
+  }
+}
+
+// ----------------- Custom Dropdown / Custom Popup -----------------
+
+.custom-dropdown {
+  @apply flex flex-col;
+  position: absolute;
+  z-index: 999;
+  overflow: hidden;
+  background-color: $white;
+  border-radius: $borderRadius;
+  box-shadow: $boxShadow;
+
+  &__dim {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    opacity: 1;
+  }
+
+  &__header {
+    @apply flex items-center justify-between;
+    @include body(font-md);
+    height: 36px;
+    line-height: 36px;
+    padding: 0 20px;
+    background: #747e96;
+    border-bottom: 1px solid $black-6;
+    color: $white;
+    font-weight: 500;
+
+    .icon--cancel {
+      min-width: 12px;
+      min-height: 12px;
+      background: url('~@/assets/img/icon/close--white.png') no-repeat center
+        center/12px;
+      cursor: pointer;
+    }
+  }
+
+  &__content {
+    @include body(font-sm);
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background: $blue-6;
+  }
+}
+
+/* ==================== Example 페이지 내 Tip 영역 ==================== */
+.tip {
+  width: 100%;
+  border-radius: 3px;
+  background-color: #f1f1ef;
+  padding: 20px;
+  list-style-type: disc;
+  list-style-position: inside;
+
+  li {
+    padding-left: 3px;
+  }
+
+  &::before {
+    content: '💡 TIP';
+    color: #e8a936;
+  }
+
+  ::marker {
+    margin-left: 5px;
+    color: #e8a936;
+  }
+}
+
+/* ==================== 게시판 형식 카운트 ==================== */
+.list-count {
+  @include body(font-lg);
+  cursor: default;
+}
+
+/* ==================== 공통 아이콘 ==================== */
+.icon {
+  &--excel {
+    display: inline-block;
+    min-width: 18px;
+    min-height: 18px;
+    background: url('~@/assets/img/icon/excel.svg') no-repeat center center /
+      17px;
+  }
+
+  &--delete {
+    display: inline-block;
+    min-width: 18px;
+    min-height: 18px;
+    background: url('~@/assets/img/icon/trashcan.svg') no-repeat left bottom /
+      16px;
+  }
+
+  &--upload {
+    display: inline-block;
+    min-width: 18px;
+    min-height: 18px;
+    background: url('~@/assets/img/icon/upload.svg') no-repeat left bottom /
+      16px;
+  }
+
+  &--plus {
+    display: inline-block;
+    min-width: 18px;
+    min-height: 18px;
+    background: url('~@/assets/img/icon/plus.svg') no-repeat left bottom / 16px;
+  }
+
+  &--cancel {
+    display: inline-block;
+    min-width: 8px;
+    min-height: 8px;
+    background: url('~@/assets/img/icon/close.png') no-repeat center center /
+      8px;
+  }
+}
+
+/* ==================== No data ==================== */
+.nodata {
+  color: $black-5;
+
+  &--form {
+    color: $black-5;
+  }
+}
+
+/* ==================== JsTree ==================== */
+.jstree {
+  @apply w-full;
+  position: relative;
+  min-height: 450px;
+  border: 1px solid $black-6;
+  border-radius: 0px 0px 2px 2px;
+  background-color: $white;
+
+  &__search {
+    @apply flex items-center;
+    padding: 10px 12px;
+    border: 1px solid $black-6;
+    border-bottom: none;
+    border-radius: 2px 2px 0px 0px;
+    background-color: #f8f8f8;
+
+    .custom-input {
+      &.form__size--150 {
+        input {
+          @apply truncate;
+          padding: 0 20px 0 32px !important;
+          background: $white url('~@/assets/img/icon/search.svg') no-repeat 8px
+            center / 16px;
+
+          &:focus {
+            background-image: none;
+            padding: 0 20px 0 10px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 임시
+:root {
+  --color-primary-800: #8928ff;
+  --color-primary-700: #9e4eff;
+  --color-primary-600: #c18dff;
+  --color-primary-500: #d3afff;
+  --color-primary-400: #e3ccff;
+  --color-primary-300: #efe2ff;
+  --color-primary-200: #f7f1ff;
+
+  --color-gray-800: #181a1b;
+  --color-gray-700: #3b4044;
+  --color-gray-600: #5c6670;
+  --color-gray-500: #525960;
+  --color-gray-400: #66707a;
+  --color-gray-300: #7f8a94;
+  --color-gray-250: #a8b3bd;
+  --color-gray-200: #dce0e5;
+  --color-gray-150: #e7ebee;
+  --color-gray-100: #f3f5f6;
+  --color-gray-50: #f9fafb;
+
+  --color-white: #ffffff;
+
+  --font-size-14: 14px;
+  --font-size-12: 12px;
+}
+
+// $--color-primary-800: #8928ff;
+// $--color-primary-700: #9e4eff;
+// $--color-primary-600: #c18dff;
+// $--color-primary-500: #d3afff;
+// $--color-primary-400: #e3ccff;
+// $--color-primary-300: #efe2ff;
+// $--color-primary-200: #f7f1ff;
+
+// $--color-gray-800: #181a1b;
+// $--color-gray-700: #3b4044;
+// $--color-gray-600: #5c6670;
+// $--color-gray-500: #525960;
+// $--color-gray-400: #66707a;
+// $--color-gray-300: #7f8a94;
+// $--color-gray-250: #a8b3bd;
+// $--color-gray-200: #dce0e5;
+// $--color-gray-150: #e7ebee;
+// $--color-gray-100: #f3f5f6;
+// $--color-gray-50: #f9fafb;
+
+// $--color-white: #ffffff;

@@ -1,0 +1,86 @@
+$btn-size: (
+    md: (padding: 12px 16px,
+        font-size: var(--font-size-14),
+        icon-size: 13px),
+    lg: (padding: 17px 50px,
+        font-size: var(--font-size-18),
+        icon-size: 18px)
+);
+
+@mixin btn-base($size: 'md', $type: 'full', $color: var(--color-primary)) {
+    display: inline-block;
+    width: fit-content;
+    line-height: 20px;
+    padding: map-get(map-get($btn-size, $size), padding);
+    border-radius: 2px;
+    border: 1px solid $color;
+    background-color: if($type=='full', $color, var(--color-white));
+    box-sizing: border-box;
+    font-size: map-get(map-get($btn-size, $size), font-size);
+    color: if($type=='full', var(--color-white), $color);
+    text-align: center;
+    transition: .3s background-color, .3s color, .3s border-color;
+    cursor: pointer;
+
+    svg {
+        width: map-get(map-get($btn-size, $size), icon-size);
+        height: map-get(map-get($btn-size, $size), icon-size);
+        fill: if($type=='full', var(--color-white), $color);
+        transition: .3s fill;
+    }
+
+    &:hover:not(:disabled) {
+        background-color: if($type=='full', var(--color-white), $color);
+        color: if($type=='full', $color, var(--color-white));
+
+        svg {
+            path {
+                fill: if($type=='full', $color, var(--color-white));
+            }
+        }
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &.has-icon {
+        @apply inline-flex items-center;
+        @include space($x: 5px);
+    }
+}
+
+.admin-btn {
+    &__primary {
+        @include btn-base;
+
+        &--lg {
+            @include btn-base($size: lg);
+        }
+    }
+
+    &__danger {
+        @include btn-base($color: #d00);
+    }
+
+    &__line {
+        @include btn-base($type: line, $color: var(--color-gray-4));
+    }
+
+    &__text {
+        padding: 12px 0;
+        border-bottom: 1px solid transparent;
+        font-size: var(--font-size-14);
+        color: gray;
+
+        svg {
+            fill: gray;
+        }
+
+        &:hover:not(:disabled) {
+            color: #333;
+            border-bottom-color: var(--color-primary);
+        }
+    }
+}

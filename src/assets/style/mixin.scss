@@ -1,0 +1,345 @@
+// 자주사용하는 믹스인 패턴
+/* ==== Font ==== */
+@mixin title($titleSize) {
+  font-family: $font-title;
+  color: $black-2;
+
+  @if $titleSize==title-lg {
+    // line-height: 50px;
+    font-size: 38px;
+    font-weight: 700;
+  } @else if $titleSize==title-md {
+    // line-height: 29px;
+    font-size: 22px;
+    font-weight: 700;
+  } @else if $titleSize==title-sm {
+    // line-height: 24px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+}
+
+@mixin body($fontSize) {
+  font-family: $font-body;
+  font-weight: 400;
+  color: $black-2;
+
+  @if $fontSize==font-xl {
+    // line-height: 21px;
+    font-size: 16px;
+  } @else if $fontSize==font-lg {
+    // line-height: 18px;
+    font-size: 14px;
+  } @else if $fontSize==font-md {
+    // line-height: 17px;
+    font-size: 13px;
+  } @else if $fontSize==font-sm {
+    // line-height: 16px;
+    font-size: 12px;
+  }
+}
+
+/* ==== Button ==== */
+@mixin btn($borderRadius) {
+  @apply flex justify-center items-center;
+  width: auto;
+  border-radius: $borderRadius;
+  text-align: center;
+  box-sizing: border-box;
+  // transition: $transition;
+  cursor: pointer;
+
+  &:focus {
+    outline: transparent;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+@mixin btn-size($btnSize) {
+  @if $btnSize==lg {
+    min-width: 79px;
+    height: $height;
+  } @else if $btnSize==sm {
+    min-width: 62px;
+    height: $height-sm;
+  }
+}
+
+@mixin btn-full($bgColor: $primary-1, $textColor: $white) {
+  border: 1px solid transparent;
+  background-color: $bgColor;
+  color: $textColor !important;
+
+  &:disabled {
+    &:hover {
+      background-color: $bgColor;
+      color: $textColor;
+    }
+  }
+}
+
+@mixin btn-line($bdColor, $textColor) {
+  border: 1px solid $bdColor;
+  background-color: $white;
+  color: $textColor;
+
+  &:disabled {
+    &:hover {
+      border-color: $bdColor;
+      background-color: $white;
+      color: $textColor;
+    }
+  }
+}
+
+/* ==== Form ==== */
+@mixin label($width: auto, $height: 32px) {
+  width: auto;
+  min-width: $width;
+  line-height: $height;
+  position: relative;
+}
+
+@mixin input($borderColor: $black-6, $width: 150px, $height: 30px) {
+  width: $width;
+  height: $height;
+  line-height: $height;
+  padding: 0 10px;
+  border: 1px solid $borderColor;
+  transition: $transition;
+
+  &::placeholder {
+    color: $black-5;
+  }
+
+  &:focus {
+    padding: 0 20px 0 10px;
+    border: 2px solid $primary-1;
+    outline: transparent;
+
+    /* focus일때 placeholder 사라지는 스타일 */
+    &::-webkit-input-placeholder {
+      background: none;
+      color: transparent;
+    }
+  }
+
+  &:read-only {
+    border-color: $black-6;
+    background-color: $blue-7;
+    cursor: default;
+
+    &::placeholder {
+      color: $black-2;
+    }
+
+    &:focus {
+      border: 1px solid $black-6;
+      outline: transparent;
+
+      /* readonly상태에서 focus일때 placeholder 사라지지 않도록 하는 스타일 */
+      &::-webkit-input-placeholder {
+        color: $black-2;
+      }
+
+      &::placeholder {
+        color: $black-2;
+      }
+    }
+  }
+
+  &:disabled {
+    padding: 0 10px;
+    border-color: $black-6;
+    background-color: #fafafa;
+    color: $black-5;
+    cursor: not-allowed;
+
+    &::placeholder {
+      color: $black-5;
+    }
+  }
+}
+
+@mixin textarea($width: 150px) {
+  flex: 1 1 0%;
+  width: $width;
+  height: 50px;
+  padding: 7px 10px 6px;
+  resize: none;
+  transition: $transition;
+  outline: 1px solid $black-6;
+
+  &:focus {
+    border: 2px solid $primary-1;
+
+    /* focus일때 placeholder 사라지는 스타일 */
+    &::-webkit-input-placeholder {
+      color: transparent;
+      background: none;
+    }
+  }
+
+  &:read-only {
+    border-color: transparent;
+    cursor: default;
+
+    &:focus {
+      border: 2px solid transparent;
+      outline: transparent;
+
+      /* readonly상태에서 focus일때 placeholder 사라지지 않도록 하는 스타일 */
+      &::-webkit-input-placeholder {
+        color: $gray-70;
+      }
+    }
+  }
+}
+
+@mixin checkbox($size: 20px, $justify: flex-start, $lineh: 27px) {
+  display: flex;
+  align-items: center;
+  justify-content: $justify;
+  line-height: $lineh;
+
+  input[type='checkbox'] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $size;
+    height: $size;
+    border: 1px solid $black-6;
+    background: $white;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    transition: $transition;
+
+    &:focus {
+      outline: transparent;
+    }
+
+    &:checked {
+      position: relative;
+      border-color: $primary-1;
+      background-color: $primary-1;
+
+      &:before {
+        content: '';
+        width: 12px;
+        height: 7px;
+        margin: 0 0 3px 0;
+        transform: rotate(-45deg);
+        border-left: 2px solid $white;
+        border-bottom: 2px solid $white;
+      }
+    }
+
+    &:disabled {
+      border-color: $black-6;
+      background-color: #fafafa;
+      pointer-events: none;
+      cursor: not-allowed;
+
+      & + label {
+        opacity: 0.4;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+
+      &:before {
+        border-left: 2px solid $black-6;
+        border-bottom: 2px solid $black-6;
+      }
+    }
+  }
+
+  label {
+    margin-left: 6px;
+    cursor: pointer;
+  }
+}
+
+@mixin radio($size: 20px, $justify: flex-start, $lineh: 27px) {
+  display: flex;
+  align-items: center;
+  justify-content: $justify;
+  line-height: $lineh;
+
+  input[type='radio'] {
+    width: $size;
+    height: $size;
+    border: 1px solid $black-6;
+    border-radius: 50%;
+    background: $white;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    transition: $transition;
+
+    &:checked {
+      position: relative;
+      border-color: $primary-1;
+      background-color: $primary-1;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: $white;
+      }
+    }
+
+    &:disabled {
+      background-color: #fafafa;
+      border-color: $black-6;
+      pointer-events: none;
+      cursor: not-allowed;
+
+      & + label {
+        color: $black-5;
+        cursor: not-allowed;
+      }
+
+      &:checked {
+        background-color: #fafafa;
+
+        &:before {
+          background-color: $black-6;
+        }
+      }
+    }
+  }
+
+  label {
+    @apply flex-1;
+    margin-left: 6px;
+    padding-bottom: 3px;
+    text-align: left;
+    cursor: pointer;
+  }
+}
+
+@mixin line {
+  border-color: #dce0e5;
+
+  &-under {
+    border-bottom: 1px solid;
+  }
+}

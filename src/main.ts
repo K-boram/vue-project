@@ -1,14 +1,18 @@
-import './assets/main.css'
+// import './assets/main.css'
+import './assets/style/common.scss'
+import './assets/style/components/_button.scss'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
-import App from './App.vue'
+// import App from './App.vue'
+import Violet from './views/Violet.vue'
 import router from './router'
 
-const app = createApp(App)
+// const app = createApp(App)
+const violet = createApp(Violet)
 
-app.use(createPinia())
-app.use(router)
+violet.use(createPinia())
+violet.use(router)
 
-app.mount('#app')
+violet.mount('#violet')

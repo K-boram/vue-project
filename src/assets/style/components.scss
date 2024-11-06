@@ -1,0 +1,55 @@
+.txt-test {
+  color: $purple-1;
+}
+input {
+  height: 40px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 1px solid $gray-50;
+  padding: 0 15px;
+  &:focus {
+    border-color: $purple-1;
+  }
+  &::placeholder {
+    color: $black-4;
+  }
+}
+
+// layout
+.layout__container {
+  // @apply flex;
+  // @include flex;
+  display: flex;
+}
+.layout__content {
+  // background: $gray-70;
+  // @include flex-1;
+  flex: 1;
+  background: #f9fafb;
+  padding: 20px;
+}
+
+.sidebar {
+  background: $white;
+  box-shadow: $boxShadow;
+  width: 260px;
+  height: 100vh;
+  padding: 20px;
+
+  &__logo {
+    height: 60px;
+    background: $purple-1;
+  }
+}
+
+.header {
+  // @include line-under;
+  height: 80px;
+}
+
+.contents {
+  background: $white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: $boxShadow;
+}
