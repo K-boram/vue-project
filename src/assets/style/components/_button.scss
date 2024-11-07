@@ -16,17 +16,30 @@ $btn-size: (
   ),
 );
 
-@mixin btn-base($size: 'md', $type: 'full', $color: var(--color-primary)) {
+@mixin btn-base($size: 'md', $type: 'full', $color: var(--color-primary-800)) {
   display: inline-block;
   width: fit-content;
   line-height: 20px;
   padding: map-get(map-get($btn-size, $size), padding);
   border-radius: 4px;
-  border: 1px solid $color;
-  background-color: if($type== 'full', $color, var(--color-white));
+  border: none;
+  // border: 1px solid $color;
+  // background-color: if($type== 'full', $color, var(--color-white));
   box-sizing: border-box;
   font-size: map-get(map-get($btn-size, $size), font-size);
-  color: if($type== 'full', var(--color-white), $color);
+  // color: if($type== 'full', var(--color-white), $color);
+  @if $type == 'primary' {
+    background: var(--color-primary-800);
+    color: var(--color-white);
+  } @else if $type == 'line' {
+    background: var(--color-white);
+    color: var(--color-primary-800);
+    border: 1px solid var(--color-primary-800);
+
+    &:active {
+      background-color: rgba(0, 0, 0, 0.12);
+    }
+  }
   text-align: center;
   transition:
     0.3s background-color,
@@ -53,13 +66,12 @@ $btn-size: (
   // }
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
   }
 
-  &.has-icon {
-    @apply inline-flex items-center;
-    // @include space($x: 5px);
+  & + button {
+    margin-left: 10px;
   }
 }
 
@@ -99,14 +111,98 @@ $btn-size: (
   }
 }
 
-.primary {
-  @include btn-base($color: var(--color-primary-800));
-  // @include btn-base($color: --color-primary-800);
-
-  &--lg {
-    @include btn-base($size: lg, $color: var(--color-primary-800));
+@mixin btn-neutral($size: 'md', $type: 'normal', $color: var(--color-white)) {
+  display: inline-block;
+  width: fit-content;
+  padding: map-get(map-get($btn-size, $size), padding);
+  background: $color;
+  border-radius: 4px;
+  color: var(--color-gray-400);
+  cursor: pointer;
+  @if $type == 'line' {
+    border: 1px solid var(--color-gray-150);
+  } @else if $type != 'line' {
+    border: none;
   }
-  &--sm {
-    @include btn-base($size: sm, $color: var(--color-primary-800));
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
+    background: rgba(0, 0, 0, 0.06);
+  }
+
+  &:active(:disabled) {
+    background: rgba(0, 0, 0, 0.12);
+  }
+
+  & + button {
+    margin-left: 10px;
+  }
+}
+
+// icon
+@mixin btn-icon($type: 'img') {
+  // @apply flex, align-items, justify-center;
+  display: inline-block;
+  width: fit-content;
+  border: none;
+  background-color: var(--color-white);
+  cursor: pointer;
+  &:before {
+    content: '';
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center center;
+    @if $type == 'img' {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.btn {
+  &--primary {
+    @include btn-base($color: var(--color-primary-800), $type: 'primary');
+
+    &__lg {
+      @include btn-base($size: 'lg', $type: 'primary');
+    }
+
+    &__sm {
+      @include btn-base($size: 'sm', $type: 'primary');
+    }
+  }
+
+  &--line {
+    @include btn-base($color: var(--color-white), $type: 'line');
+
+    &__lg {
+      @include btn-base($size: 'lg', $type: 'line');
+    }
+
+    &__sm {
+      @include btn-base($size: 'sm', $type: 'line');
+    }
+  }
+
+  &--neutral {
+    @include btn-neutral($color: var(--color-white));
+  }
+  &--neline {
+    @include btn-neutral($type: 'line');
+  }
+
+  &--icon {
+    @include btn-icon;
+
+    &__play {
+      @include btn-icon($type: 'img');
+      &:before {
+        background: url('/src/assets/icon/play.svg');
+      }
+    }
   }
 }

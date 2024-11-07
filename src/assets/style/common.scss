@@ -4,6 +4,10 @@
 @import './components.scss';
 @import './components/_button.scss';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* ==================== Font Face ==================== */
 @font-face {
   font-family: 'Malgun Gothic';
@@ -127,6 +131,8 @@ button,
 input,
 textarea,
 a {
+  text-decoration: none;
+  color: var(--color-gray-500);
   &:focus {
     outline: transparent !important;
   }
@@ -144,9 +150,7 @@ a {
 // 링크
 
 /* ==================== Button ==================== */
-button + button {
-  margin-left: 10px;
-}
+
 /* ==================== Form ==================== */
 
 /* ==== Tree Select ==== */
@@ -544,6 +548,40 @@ button + button {
             padding: 0 20px 0 10px !important;
           }
         }
+      }
+    }
+  }
+}
+
+.board {
+  width: 100%;
+  box-sizing: border-box;
+  border-spacing: 0;
+  td {
+    border: none;
+  }
+  thead tr {
+    background: var(--color-gray-100);
+
+    td {
+      padding: 10px 0;
+      text-align: center;
+      border-bottom: 1px solid var(--color-gray-500);
+    }
+  }
+  tbody {
+    tr:hover {
+      background: rgb(245, 238, 251, 0.5);
+    }
+    td {
+      padding: 10px 7px;
+      color: var(--color-gray-500);
+      font-size: var(--font-size-14);
+      text-align: center;
+      border-bottom: 1px solid var(--color-gray-200);
+
+      &.t--left {
+        text-align: left;
       }
     }
   }
